@@ -28,8 +28,6 @@ end
 env ? env << "." : env
 base_url = "https://#{domain}.#{env}instructure.com/api/v1"
 
-# Make generic API call to test token, domain, and env.
-
   url ="#{base_url}/accounts/"
   list_accounts = Unirest.get(url, headers: { "Authorization" => "Bearer #{access_token}" }) 
   job = list_accounts.body
@@ -37,7 +35,6 @@ base_url = "https://#{domain}.#{env}instructure.com/api/v1"
   CSV.open("#{filename}", "w") do |csv| #open new file for write
                   csv << headers
                 end
-#commented out from here. lets focus on the folders first
 
     job.each do |account|
 
@@ -58,7 +55,7 @@ base_url = "https://#{domain}.#{env}instructure.com/api/v1"
               username = unique_admin["user"]["name"]
               data = [aid, aname, asisid, adminid, role, roleid, userid, username]
               
-                CSV.open("#{filename}", "a") do |csv| #open new file for write
+                CSV.open("#{filename}", "a") do |csv| #open same file for write
                   csv << data #write value to file
                  
                 end
